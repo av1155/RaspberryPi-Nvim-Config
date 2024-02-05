@@ -11,6 +11,7 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.json" },
+  { import = "astrocommunity.pack.markdown" },
 
   -- User Interface
   { import = "astrocommunity.bars-and-lines.heirline-vscode-winbar" },
