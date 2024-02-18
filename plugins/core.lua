@@ -81,7 +81,7 @@ return {
 
       -- Adjust padding in the layout
       opts.config.layout = {
-        { type = "padding", val = 7 }, -- Adjust top padding
+        { type = "padding", val = 1 }, -- Adjust top padding
         opts.section.header,
         { type = "padding", val = 3 }, -- Adjust padding between header and buttons
         opts.section.buttons,

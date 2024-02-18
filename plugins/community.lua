@@ -11,6 +11,7 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.json" },
+  -- { import = "astrocommunity.pack.java" },
   { import = "astrocommunity.pack.markdown" },
 
   -- User Interface
@@ -70,6 +71,7 @@ return {
 
   -- Utility and Tools
   { import = "astrocommunity.completion.cmp-cmdline" },
+  { import = "astrocommunity.terminal-integration.vim-tmux-yank" },
   { "hrsh7th/cmp-cmdline", event = "VeryLazy" },
   { import = "astrocommunity.completion.copilot-lua-cmp" },
   { import = "astrocommunity.utility.noice-nvim" },
@@ -107,6 +109,27 @@ return {
         { filter = { event = "msg_show", find = "^%d+ more lines$" }, opts = { skip = true } }, -- skip paste notifications
         { filter = { event = "msg_show", find = "^%d+ fewer lines$" }, opts = { skip = true } }, -- skip delete notifications
         { filter = { event = "msg_show", find = "^%d+ lines yanked$" }, opts = { skip = true } }, -- skip yank notifications
+      },
+    },
+  },
+
+  { -- further customize the options set by the community
+    "mfussenegger/nvim-jdtls",
+    opts = {
+      single_file_support = true,
+      root_dir = vim.fs.dirname(vim.fs.find({ ".idea", "gradlew", ".git", "mvnw" }, { upward = true })[1])
+        or vim.fn.getcwd(),
+      capabilities = {
+        workspace = {
+          configuration = true,
+        },
+        textDocument = {
+          completion = {
+            completionItem = {
+              snippetSupport = true,
+            },
+          },
+        },
       },
     },
   },
