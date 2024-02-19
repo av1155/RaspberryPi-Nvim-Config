@@ -151,6 +151,26 @@ return {
         })
 
         -- ================================================================================
+
+        -- Configuration for setting OPENAI_API_KEY environment variable
+        -- Create an augroup for ChatGPT setup autocommands
+        local group = vim.api.nvim_create_augroup("ChatGPTSetup", { clear = true })
+
+        -- Autocmd to set OPENAI_API_KEY when the 'VeryLazy' user event is triggered
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "VeryLazy",
+            group = group,
+            callback = function()
+                vim.fn.setenv(
+                    "OPENAI_API_KEY",
+                    vim.fn.trim(vim.fn.system "bash ~/.dotfiles/configs/zsh/openai_api_key.sh")
+                )
+            end,
+        })
+
+        -- ================================================================================
+
+        -- ================================================================================
         -- Set up custom filetypes
         -- vim.filetype.add {
         --   extension = {

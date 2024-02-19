@@ -149,6 +149,7 @@ return {
     { "hrsh7th/cmp-cmdline", event = "VeryLazy" },
     { import = "astrocommunity.completion.copilot-lua-cmp" },
     { import = "astrocommunity.utility.noice-nvim" },
+    { import = "astrocommunity.motion.harpoon" },
     { import = "astrocommunity.motion.nvim-surround" },
     { import = "astrocommunity.scrolling.mini-animate" },
     { -- further customize the options set by the community
@@ -203,6 +204,22 @@ return {
                             snippetSupport = true,
                         },
                     },
+                },
+            },
+        },
+    },
+
+    { import = "astrocommunity.editing-support.chatgpt-nvim" },
+    { -- further customize the options set by the community
+        "jackMort/ChatGPT.nvim",
+        opts = {
+            chat = {
+                question_sign = "",
+                answer_sign = "󰚩",
+                sessions_window = {
+                    active_sign = "  ",
+                    inactive_sign = " 󰄱 ",
+                    current_line_sign = "",
                 },
             },
         },
