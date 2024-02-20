@@ -150,6 +150,7 @@ return {
     { import = "astrocommunity.completion.copilot-lua-cmp" },
     { import = "astrocommunity.utility.noice-nvim" },
     { import = "astrocommunity.motion.harpoon" },
+    { import = "astrocommunity.scrolling.neoscroll-nvim" },
     { import = "astrocommunity.motion.nvim-surround" },
     { import = "astrocommunity.scrolling.mini-animate" },
     { -- further customize the options set by the community
