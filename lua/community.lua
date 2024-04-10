@@ -79,14 +79,6 @@ return {
     { import = "astrocommunity.lsp.lsplinks-nvim" },
     { import = "astrocommunity.lsp.nvim-lint" },
     { import = "astrocommunity.lsp.nvim-lsp-file-operations" },
-    { import = "astrocommunity.lsp.ts-error-translator-nvim" },
-
-    -- DEBUGGING ============================================================
-    { import = "astrocommunity.debugging.nvim-bqf" },
-    { import = "astrocommunity.debugging.nvim-dap-repl-highlights" },
-    { import = "astrocommunity.debugging.nvim-dap-virtual-text" },
-    { import = "astrocommunity.debugging.persistent-breakpoints-nvim" },
-    { import = "astrocommunity.debugging.telescope-dap-nvim" },
 
     -- LANGUAGES ============================================================
     { import = "astrocommunity.pack.bash" },
