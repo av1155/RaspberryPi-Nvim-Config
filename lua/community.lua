@@ -66,15 +66,27 @@ return {
 
     --]]
 
-    -- DIAGNOSTICS ==========================================================
+    -- LSP AND DIAGNOSTICS =================================================
     { import = "astrocommunity.code-runner.compiler-nvim" },
     { import = "astrocommunity.code-runner.sniprun" },
     { import = "astrocommunity.diagnostics.trouble-nvim" },
     { import = "astrocommunity.lsp.actions-preview-nvim" },
+    { import = "astrocommunity.lsp.delimited-nvim" },
     { import = "astrocommunity.lsp.garbage-day-nvim" },
     { import = "astrocommunity.lsp.inc-rename-nvim" },
+    { import = "astrocommunity.lsp.lsp-lens-nvim" },
     { import = "astrocommunity.lsp.lsp-signature-nvim" },
+    { import = "astrocommunity.lsp.lsplinks-nvim" },
+    { import = "astrocommunity.lsp.nvim-lint" },
     { import = "astrocommunity.lsp.nvim-lsp-file-operations" },
+    { import = "astrocommunity.lsp.ts-error-translator-nvim" },
+
+    -- DEBUGGING ============================================================
+    { import = "astrocommunity.debugging.nvim-bqf" },
+    { import = "astrocommunity.debugging.nvim-dap-repl-highlights" },
+    { import = "astrocommunity.debugging.nvim-dap-virtual-text" },
+    { import = "astrocommunity.debugging.persistent-breakpoints-nvim" },
+    { import = "astrocommunity.debugging.telescope-dap-nvim" },
 
     -- LANGUAGES ============================================================
     { import = "astrocommunity.pack.bash" },
