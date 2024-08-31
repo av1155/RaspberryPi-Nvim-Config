@@ -32,7 +32,7 @@ return {
         -- vim options can be configured here
         options = {
             opt = { -- vim.opt.<key>
-                relativenumber = false, -- sets vim.opt.relativenumber
+                relativenumber = true, -- sets vim.opt.relativenumber
                 number = true, -- sets vim.opt.number
                 spell = false, -- sets vim.opt.spell
                 signcolumn = "auto", -- sets vim.opt.signcolumn to auto
@@ -107,6 +107,24 @@ return {
                     desc = "Code Readability Analysis",
                 },
 
+                -- Gen (Ollama) plugin mappings
+                ["<leader>m"] = { name = "󰳆 Gen" },
+                ["<leader>mu"] = { ":'<,'>Gen<cr>", desc = "Open Gen UI" },
+                ["<leader>mt"] = { ":'<,'>Gen Chat<cr>", desc = "Chat" },
+                ["<leader>mg"] = { ":'<,'>Gen Generate<cr>", desc = "Generate" },
+                ["<leader>ms"] = { ":'<,'>Gen Summarize<cr>", desc = "Summarize" },
+                ["<leader>mr"] = { ":'<,'>Gen Review_Code<cr>", desc = "Review Code" },
+                ["<leader>me"] = { ":'<,'>Gen Enhance_Code<cr>", desc = "Enhance Code" },
+                ["<leader>mc"] = { ":'<,'>Gen Change_Code<cr>", desc = "Change Code" },
+                ["<leader>ma"] = { ":'<,'>Gen Ask<cr>", desc = "Ask" },
+
+                ["<leader>mm"] = { name = " Make" },
+                ["<leader>mmg"] = { ":'<,'>Gen Enhance_Grammar_Spelling<cr>", desc = "Enhance Grammar" },
+                ["<leader>mmw"] = { ":'<,'>Gen Enhance_Wording<cr>", desc = "Enhance Wording" },
+                ["<leader>mmc"] = { ":'<,'>Gen Make_Concise<cr>", desc = "Make Concise" },
+                ["<leader>mml"] = { ":'<,'>Gen Make_List<cr>", desc = "Make List" },
+                ["<leader>mmt"] = { ":'<,'>Gen Make_Table<cr>", desc = "Make Table" },
+
                 -- Code Runner mappings
                 ["<leader>r"] = { name = " Code Runner" },
 
@@ -116,6 +134,11 @@ return {
 
             -- Normal mode mappings
             n = {
+                -- CUSTOM KEYMAPS TO SPECIFIC THINGS:
+                ["<CR>"] = { ":", desc = "Open command line", noremap = true },
+                ["<leader>s"] = { ":SearchBoxReplace<CR>", desc = "Search and Replace" },
+                ["<leader>`"] = { "<Cmd>Oil<CR>", desc = "Open Oil" },
+                ["<A-s>"] = { "<Cmd>w<CR>", desc = "Save" },
                 ["<leader>f"] = { name = "󰍉 Find" },
 
                 -- Dadbod:
@@ -204,10 +227,6 @@ return {
                 ["<leader>lq"] = { "<cmd>lua require('goto-preview').close_all_win()<CR>", desc = "Close GoTo preview" },
                 -- stylua: ignore end
 
-                -- Command and Search
-                ["<CR>"] = { ":", desc = "Open command line", noremap = true },
-                ["<leader>s"] = { ":SearchBoxReplace<CR>", desc = "Search and Replace" },
-
                 -- GitHub Copilot mappings
                 ["<leader>G"] = { name = " GitHub Copilot" },
                 ["<leader>GE"] = { "<cmd>Copilot enable<cr>", desc = "Enable Copilot" },
@@ -250,6 +269,9 @@ return {
                     desc = "JavaCompileRun Script",
                 },
 
+                -- Toggle Terminal
+                ["<A-z>"] = { "<cmd>ToggleTerm<CR>", desc = "Toggle Terminal" },
+
                 -- ScrollView mappings
                 ["<leader>uv"] = { "<cmd>ScrollViewToggle<cr>", desc = "Toggle ScrollView" },
                 ["<leader>uB"] = { "<cmd>ScrollViewRefresh<CR>", desc = "Refresh Scrollview" },
@@ -261,6 +283,12 @@ return {
                 ["<leader>Tf"] = { "<cmd>TodoQuickFix<cr>", desc = "Show TODOs in Quickfix" },
                 ["<leader>Tl"] = { "<cmd>TodoLocList<cr>", desc = "Show TODOs in Location List" },
                 ["<leader>Tt"] = { "<cmd>TodoTrouble<cr>", desc = "List TODOs in Trouble" },
+
+                -- Gen (Ollama) plugin mappings
+                ["<leader>m"] = { name = "󰳆 Gen" },
+                ["<leader>mu"] = { "<cmd>Gen<cr>", desc = "Open Gen UI" },
+                ["<leader>mt"] = { "<cmd>Gen Chat<cr>", desc = "Chat" },
+                ["<leader>mg"] = { "<cmd>Gen Generate<cr>", desc = "Generate" },
 
                 -- Markdown Preview mappings
                 ["<leader>M"] = { name = " Markdown Preview" },

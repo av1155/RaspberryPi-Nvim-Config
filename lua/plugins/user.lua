@@ -132,7 +132,7 @@ return {
     {
         "L3MON4D3/LuaSnip",
         config = function(plugin, opts)
-            require "astronvim.plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
+            require "astronvim.plugins.configs.luasnip" (plugin, opts) -- include the default astronvim config that calls the setup call
             -- add more custom luasnip configuration such as filetype extend or custom snippets
             local luasnip = require "luasnip"
             luasnip.filetype_extend("javascript", { "javascriptreact" })
@@ -142,7 +142,7 @@ return {
     {
         "windwp/nvim-autopairs",
         config = function(plugin, opts)
-            require "astronvim.plugins.configs.nvim-autopairs"(plugin, opts) -- include the default astronvim config that calls the setup call
+            require "astronvim.plugins.configs.nvim-autopairs" (plugin, opts) -- include the default astronvim config that calls the setup call
             -- add more custom autopairs configuration such as custom rules
             local npairs = require "nvim-autopairs"
             local Rule = require "nvim-autopairs.rule"
@@ -150,17 +150,17 @@ return {
             npairs.add_rules(
                 {
                     Rule("$", "$", { "tex", "latex" })
-                        -- don't add a pair if the next character is %
+                    -- don't add a pair if the next character is %
                         :with_pair(cond.not_after_regex "%%")
-                        -- don't add a pair if  the previous character is xxx
+                    -- don't add a pair if  the previous character is xxx
                         :with_pair(
                             cond.not_before_regex("xxx", 3)
                         )
-                        -- don't move right when repeat character
+                    -- don't move right when repeat character
                         :with_move(cond.none())
-                        -- don't delete if the next character is xx
+                    -- don't delete if the next character is xx
                         :with_del(cond.not_after_regex "xx")
-                        -- disable adding a newline when you press <cr>
+                    -- disable adding a newline when you press <cr>
                         :with_cr(cond.none()),
                 },
                 -- disable for .vim files, but it work for another filetypes
@@ -194,17 +194,17 @@ return {
         event = "User AstroFile",
         config = function()
             require("treesitter-context").setup {
-                enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-                max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-                min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+                enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
+                max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
+                min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
                 line_numbers = true,
                 multiline_threshold = 20, -- Maximum number of lines to show for a single context
-                trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-                mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
+                trim_scope = "outer",     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+                mode = "cursor",          -- Line used to calculate context. Choices: 'cursor', 'topline'
                 -- Separator between context and content. Should be a single character string, like '-'.
                 -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
                 separator = "-",
-                zindex = 20, -- The Z-index of the context window
+                zindex = 20,     -- The Z-index of the context window
                 on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
             }
         end,
@@ -310,6 +310,21 @@ return {
 
     -- ==========================================================
 
+    -- Gen (ollama)
+    {
+        "David-Kunz/gen.nvim",
+        opts = {
+            model = "llama3",       -- The default model to use.
+            display_mode = "float", -- The display mode. Can be "float" or "split".
+            show_prompt = true,     -- Shows the Prompt submitted to Ollama.
+            show_model = true,      -- Displays which model you are using at the beginning of your chat session.
+            no_auto_close = true,   -- Never closes the window automatically.
+        },
+        event = "User AstroFile",
+    }, -- End of 'gen.nvim'
+
+    -- ==========================================================
+
     { -- searchbox
         "VonHeikemen/searchbox.nvim",
         dependencies = { "MunifTanjim/nui.nvim" },
@@ -328,26 +343,6 @@ return {
         end,
         event = "VeryLazy",
     }, -- End of 'vim-be-good'
-
-    -- ==========================================================
-
-    { -- actions-preview
-        "aznhe21/actions-preview.nvim",
-        opts = {
-            telescope = {
-                sorting_strategy = "ascending",
-                layout_strategy = "vertical",
-                layout_config = {
-                    width = 0.8,
-                    height = 0.9,
-                    prompt_position = "top",
-                    preview_cutoff = 20,
-                    preview_height = function(_, _, max_lines) return max_lines - 15 end,
-                },
-            },
-        },
-        event = "User AstroFile",
-    }, -- End of 'actions-preview.nvim'
 
     -- ==========================================================
 
@@ -381,11 +376,11 @@ return {
                 telescope = require("telescope.themes").get_dropdown { hide_preview = false },
             },
             -- These two configs can also be passed down to the goto-preview definition and implementation calls for one off "peak" functionality.
-            focus_on_open = true, -- Focus the floating window when opening it.
-            dismiss_on_move = false, -- Dismiss the floating window when moving the cursor.
-            force_close = true, -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
-            bufhidden = "wipe", -- the bufhidden option to set on the floating window. See :h bufhidden
-            stack_floating_preview_windows = true, -- Whether to nest floating windows
+            focus_on_open = true,                                        -- Focus the floating window when opening it.
+            dismiss_on_move = false,                                     -- Dismiss the floating window when moving the cursor.
+            force_close = true,                                          -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
+            bufhidden = "wipe",                                          -- the bufhidden option to set on the floating window. See :h bufhidden
+            stack_floating_preview_windows = true,                       -- Whether to nest floating windows
             preview_window_title = { enable = true, position = "left" }, -- Whether to set the preview window title as the filename
         },
         event = "User AstroFile",
@@ -403,10 +398,10 @@ return {
             "TmuxNavigatePrevious",
         },
         keys = {
-            { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-            { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-            { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-            { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+            { "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
+            { "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
+            { "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
+            { "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
             { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
         },
     },

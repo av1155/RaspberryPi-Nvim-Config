@@ -11,9 +11,14 @@ return {
         opts = function(_, opts)
             -- add more things to the ensure_installed table protecting against community packs modifying it
             opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-                -- "lua_ls",
-                -- add more arguments for adding more language servers
+                "lua_ls",
+                -- add more language servers you want to install
             })
+            -- Remove unwanted language servers
+            opts.ensure_installed = vim.tbl_filter(
+                function(server) return server ~= "selene" and server ~= "lemminx" end,
+                opts.ensure_installed
+            )
         end,
     },
     -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
@@ -23,10 +28,15 @@ return {
         opts = function(_, opts)
             -- add more things to the ensure_installed table protecting against community packs modifying it
             opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-                -- "prettier",
-                -- "stylua",
-                -- add more arguments for adding more null-ls sources
+                "stylua",
+                "clang-format",
+                -- add more null-ls sources you want to install
             })
+            -- Remove unwanted formatters/linters
+            opts.ensure_installed = vim.tbl_filter(
+                function(source) return source ~= "selene" and source ~= "lemminx" end,
+                opts.ensure_installed
+            )
         end,
     },
     {
@@ -35,9 +45,13 @@ return {
         opts = function(_, opts)
             -- add more things to the ensure_installed table protecting against community packs modifying it
             opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-                -- "python",
-                -- add more arguments for adding more debuggers
+                "python",
+                -- add more debuggers you want to install
             })
+            -- Remove unwanted debuggers
+            opts.ensure_installed = vim.tbl_filter(function(dap) return dap ~= "selene" and dap ~= "lemminx" end,
+                opts.ensure_installed)
         end,
     },
 }
+

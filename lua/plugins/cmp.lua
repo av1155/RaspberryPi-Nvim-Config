@@ -22,16 +22,16 @@ return {
 
         -- Directly set the opts table instead of using extend_tbl
         opts.sources = cmp.config.sources {
-            { name = "copilot", priority = 1000 },
-            { name = "nvim_lsp", priority = 950 },
-            { name = "luasnip", priority = 750 },
+            { name = "copilot",           priority = 1000 },
+            { name = "nvim_lsp",          priority = 950 },
+            { name = "luasnip",           priority = 750 },
             { name = "pandoc_references", priority = 725 },
-            { name = "latex_symbols", priority = 700 },
-            { name = "emoji", priority = 700 },
-            { name = "calc", priority = 650 },
-            { name = "path", priority = 500 },
-            { name = "buffer", priority = 250 },
-            { name = "spell", priority = 200 },
+            { name = "latex_symbols",     priority = 700 },
+            { name = "emoji",             priority = 700 },
+            { name = "calc",              priority = 650 },
+            { name = "path",              priority = 500 },
+            { name = "buffer",            priority = 250 },
+            { name = "spell",             priority = 200 },
         }
 
         -- Directly set the sorting and mapping configurations
@@ -126,3 +126,4 @@ return {
         return opts
     end,
 }
+

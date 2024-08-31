@@ -69,24 +69,37 @@ return {
     -- LSP AND DIAGNOSTICS =================================================
     { import = "astrocommunity.code-runner.compiler-nvim" },
     { import = "astrocommunity.code-runner.sniprun" },
+    -- { import = "astrocommunity.diagnostics.error-lens-nvim" },
     { import = "astrocommunity.diagnostics.trouble-nvim" },
     { import = "astrocommunity.lsp.actions-preview-nvim" },
-    { import = "astrocommunity.lsp.delimited-nvim" },
+    -- { import = "astrocommunity.lsp.delimited-nvim" },
     { import = "astrocommunity.lsp.garbage-day-nvim" },
     { import = "astrocommunity.lsp.inc-rename-nvim" },
-    { import = "astrocommunity.lsp.lsp-lens-nvim" },
+    -- { import = "astrocommunity.lsp.lsp-lens-nvim" },
     { import = "astrocommunity.lsp.lsp-signature-nvim" },
     { import = "astrocommunity.lsp.lsplinks-nvim" },
-    { import = "astrocommunity.lsp.nvim-lint" },
+    -- { import = "astrocommunity.lsp.nvim-lint" },
     { import = "astrocommunity.lsp.nvim-lsp-file-operations" },
+    { import = "astrocommunity.lsp.ts-error-translator-nvim" },
+
+    -- DEBUGGING ============================================================
+    -- { import = "astrocommunity.debugging.nvim-bqf" },
+    { import = "astrocommunity.debugging.nvim-dap-repl-highlights" },
+    { import = "astrocommunity.debugging.nvim-dap-virtual-text" },
+    { import = "astrocommunity.debugging.persistent-breakpoints-nvim" },
+    { import = "astrocommunity.debugging.telescope-dap-nvim" },
 
     -- LANGUAGES ============================================================
     { import = "astrocommunity.pack.bash" },
+    { import = "astrocommunity.pack.cpp" },
+    { import = "astrocommunity.pack.html-css" },
     { import = "astrocommunity.pack.java" },
     { import = "astrocommunity.pack.json" },
     { import = "astrocommunity.pack.lua" },
     { import = "astrocommunity.pack.markdown" },
     { import = "astrocommunity.pack.python" },
+    { import = "astrocommunity.pack.tailwindcss" },
+    { import = "astrocommunity.pack.typescript" },
     { import = "astrocommunity.pack.yaml" },
 
     -- END =====================================================================
@@ -185,7 +198,7 @@ return {
                 -- * a percentage of the width / height of the editor when <= 1
                 -- * a function that returns the width or the height
                 width = 0.8, -- 80% of the editor's width
-                height = 1, -- height of the Zen window
+                height = 1,  -- height of the Zen window
                 options = {
                     signcolumn = "yes",
                 },
@@ -231,14 +244,14 @@ return {
             require("neoscroll").setup {
                 -- All these keys will be mapped to their corresponding default scrolling animation
                 mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
-                hide_cursor = true, -- Hide cursor while scrolling
-                stop_eof = true, -- Stop at <EOF> when scrolling downwards
-                respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+                hide_cursor = true,          -- Hide cursor while scrolling
+                stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+                respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
                 cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-                easing_function = nil, -- Default easing function
-                pre_hook = nil, -- Function to run before the scrolling animation starts
-                post_hook = nil, -- Function to run after the scrolling animation ends
-                performance_mode = false, -- Disable "Performance Mode" on all buffers.
+                easing_function = nil,       -- Default easing function
+                pre_hook = nil,              -- Function to run before the scrolling animation starts
+                post_hook = nil,             -- Function to run after the scrolling animation ends
+                performance_mode = false,    -- Disable "Performance Mode" on all buffers.
             }
         end,
     },
@@ -322,14 +335,28 @@ return {
                 signature = { enabled = false },
             },
             routes = {
-                { filter = { event = "msg_show", min_height = 20 }, view = "messages" }, -- send long messages to split
-                { filter = { event = "msg_show", find = "%d+L,%s%d+B" }, view = "mini" }, -- save notification settings
-                { filter = { event = "msg_show", find = "^%d+ more lines$" }, opts = { skip = true } }, -- skip paste notifications
-                { filter = { event = "msg_show", find = "^%d+ fewer lines$" }, opts = { skip = true } }, -- skip delete notifications
-                { filter = { event = "msg_show", find = "^%d+ lines yanked$" }, opts = { skip = true } }, -- skip yank notifications
+                { filter = { event = "msg_show", min_height = 20 },                                      view = "messages" },      -- send long messages to split
+                { filter = { event = "msg_show", find = "%d+L,%s%d+B" },                                 view = "mini" },          -- save notification settings
+                { filter = { event = "msg_show", find = "^%d+ more lines$" },                            opts = { skip = true } }, -- skip paste notifications
+                { filter = { event = "msg_show", find = "^%d+ fewer lines$" },                           opts = { skip = true } }, -- skip delete notifications
+                { filter = { event = "msg_show", find = "^%d+ lines yanked$" },                          opts = { skip = true } }, -- skip yank notifications
                 { filter = { event = "notify", find = "Client with id %d+ not attached to buffer %d+" }, opts = { skip = true } }, -- skip buffer attach notifications
-                { filter = { event = "notify", find = "selene" }, opts = { skip = true } }, -- skip buffer attach notifications
-                { filter = { event = "notify", find = "lemminx" }, opts = { skip = true } }, -- skip buffer attach notifications
+                {                                                                                                                  -- Add a filter to skip any classpath provider error message
+                    filter = {
+                        event = "msg_show",
+                        find =
+                        "Could not resolve classpath and modulepath for .+: Failed to resolve classpath: Referenced classpath provider does not exist: org%.eclipse%.m2e%.launchconfig%.classpathProvider",
+                    },
+                    opts = { skip = true },
+                },
+                { -- Add a filter to skip the Tree-sitter error message
+                    filter = {
+                        event = "msg_show",
+                        find =
+                        "There is no parser available for buffer %d+ and one could not be created because lang could not be determined. Either pass lang or set the buffer filetype",
+                    },
+                    opts = { skip = true },
+                },
             },
         },
     },
@@ -346,7 +373,7 @@ return {
             -- return true | 'inline' to show hint inline, return 'eol' to show hint at end of line, return false to disable
             -- return 'right_align' to display hint right aligned in the current line
             close_timeout = nil, -- Disable automatic closing of the floating window
-            fix_pos = true, -- Keep the floating window open until all parameters are completed
+            fix_pos = true,      -- Keep the floating window open until all parameters are completed
         },
     },
     -- =========================================================================
@@ -354,7 +381,8 @@ return {
         "mfussenegger/nvim-jdtls",
         opts = {
             single_file_support = true,
-            root_dir = vim.fs.dirname(vim.fs.find({ ".idea", "gradlew", ".git", "mvnw" }, { upward = true })[1]) or vim.fn.getcwd(),
+            root_dir = vim.fs.dirname(vim.fs.find({ ".idea", "gradlew", ".git", "mvnw" }, { upward = true })[1]) or
+            vim.fn.getcwd(),
             capabilities = {
                 workspace = {
                     configuration = true,

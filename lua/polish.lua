@@ -120,9 +120,11 @@ vim.api.nvim_exec(
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
     callback = function()
         if vim.tbl_contains({
-            "neo-tree",
-            "aerial",
-        }, vim.bo.filetype) then return end
+                "neo-tree",
+                "aerial",
+            }, vim.bo.filetype) then
+            return
+        end
 
         local ok, cl = pcall(vim.api.nvim_win_get_var, 0, "auto-cursorline")
         if ok and cl then
@@ -135,9 +137,11 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
 vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
     callback = function()
         if vim.tbl_contains({
-            "neo-tree",
-            "aerial",
-        }, vim.bo.filetype) then return end
+                "neo-tree",
+                "aerial",
+            }, vim.bo.filetype) then
+            return
+        end
 
         local cl = vim.wo.cursorline
         if cl then
