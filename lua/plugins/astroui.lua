@@ -16,6 +16,12 @@ return {
         highlights = {
             init = { -- this table overrides highlights in all themes
                 -- Normal = { bg = "#000000" },
+
+                -- Add or modify highlight groups specifically for nvim-dap-virtual-text
+                NvimDapVirtualText = { fg = "#b58900", bg = "", italic = true },
+                NvimDapVirtualTextError = { fg = "#dc322f", bg = "", bold = true, underline = true },
+                NvimDapVirtualTextChanged = { fg = "#6c71c4", bg = "", underline = true },
+
                 -- barbar plugin for Current buffer
                 BufferCurrent = { fg = "#f28b25", bg = "" },
                 BufferCurrentIndex = { fg = "#89b4fb", bg = "" },
