@@ -51,6 +51,7 @@ return {
                 softtabstop = 4,
                 shiftwidth = 4,
                 expandtab = true,
+                clipboard = "unnamedplus", -- Use the system clipboard
             },
             g = { -- vim.g.<key>
                 -- configure global vim variables (vim.g)
